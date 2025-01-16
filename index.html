@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camera Access</title>
+</head>
+<body>
+  <h1>Scan Your Barcode</h1>
+  <video id="camera" autoplay playsinline></video>
+  <script>
+    const videoElement = document.getElementById("camera");
+
+    async function startCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: "environment" } // Use rear camera
+        });
+        videoElement.srcObject = stream;
+      } catch (err) {
+        console.error("Error accessing camera: ", err);
+        alert("Camera access is required to use this feature.");
+      }
+    }
+
+    startCamera();
+  </script>
+</body>
+</html>
